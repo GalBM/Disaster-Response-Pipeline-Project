@@ -26,12 +26,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///ETL_Preparation.db')
+engine = create_engine('sqlite:///../ETL_Preparation.db')
 df = pd.read_sql_table('data_disaster', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
-
+model = joblib.load("../Gal_project_model.pkl")
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')

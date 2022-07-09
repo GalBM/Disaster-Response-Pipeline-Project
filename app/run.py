@@ -30,7 +30,8 @@ engine = create_engine('sqlite:///../ETL_Preparation.db')
 df = pd.read_sql_table('data_disaster', engine)
 
 # load model
-model = joblib.load("../Gal_project_model.pkl")
+model = joblib.load("../models/classifier.pkl")
+
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
@@ -41,7 +42,9 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
-    
+    mess_dist=df.drop(columns=['id', 'message', 'original', 'genre','related']).sum()/df.shape[0]*100
+    mess_dist=mess_dist.sort_values(ascending=False).head(10)
+    mess_idx=list(mess_dist.index)
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -60,6 +63,24 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+                {
+            'data': [
+                Bar(
+                    y=mess_dist,
+                    x=mess_idx
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of disaster prediction ',
+                'yaxis': {
+                    'title': "precent"
+                },
+                'xaxis': {
+                    'title': "disaster prediction"
                 }
             }
         }

@@ -8,6 +8,13 @@ def load_data(messages_filepath, categories_filepath):
     
     """
     load 2 data base and return merged dataframe
+    
+    input: 
+    messages_filepath- path of message.csv
+    categories_filepath- of od category csv
+    
+    return:
+     new df which cotian the 2 input dataframe
     """
     
     messages = pd.read_csv(messages_filepath)
@@ -18,6 +25,14 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """
+    the function clean the df:
+    1.creating diffrent category on the data frame
+    2.remove duplicate value
+    3. manipulate and create new df that we can work with it to build the ML
+    input- row dataframe
+    output - clean dataframe
+    """
     # create a dataframe of the 36 individual category columns
     categories = df["categories"].str.split(";",expand=True)
     # select the first row of the categories dataframe
@@ -53,6 +68,13 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    save the dataframe to future using
+    input 
+    df - clean dataframe
+    database_filename- the desire saved name
+    output- NA
+    """
     engine = create_engine('sqlite:///ETL_Preparation.db')
     df.to_sql('data_disaster', engine, index=False, if_exists='replace')
     pass  

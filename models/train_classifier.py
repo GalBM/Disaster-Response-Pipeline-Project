@@ -33,6 +33,13 @@ import pickle
 def load_data(database_filepath):
     """
     lodaing the data base for the ML 
+    input:
+    database_filepath- the path of csv dataframe
+    output:
+    X-the data feature of the ML
+    Y- the prediction of the ML
+    categoriname - list of all the features
+    
     """
     engine = create_engine('sqlite:///ETL_Preparation.db')
     df = pd.read_sql_table('data_disaster', engine)
@@ -83,6 +90,13 @@ def build_model():
 def evaluate_model(model, X_test, y_test, category_names):
     """
     get evaluation of the model using test data
+    input:
+    model -ML model
+    X_test- the feature test data
+    y_test- the prediciton test data
+    category_name- list with all the categories
+    return:
+    print class report
     """
     y_pred = model.predict(X_test)
     class_report = classification_report(y_test, y_pred, target_names=category_names)

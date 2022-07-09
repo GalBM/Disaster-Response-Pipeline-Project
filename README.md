@@ -4,7 +4,7 @@
 in the next project I create an we program using ML which classifiy disaster events text to emergency events
 furthermore, I experience using ML and data analysis pipeline
 
-the importnace of the project is in the classifing big data of emegency calling and classify it to the apropiate target  , it can save time resource and life
+the importnace of the project is in the classifing big data of emegency calling and classify it to the apropiate target  , it can saves time resources and life
 
 ## Installation 
 he used libraries are: 
@@ -34,7 +34,7 @@ data\
 models\
 |- train_classifier.py\
 |- classifier.pkl # saved model\
-README.md\
+README.md
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.

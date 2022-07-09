@@ -4,6 +4,8 @@
 in the next project I create an we program using ML which classifiy disaster events text to emergency events
 furthermore, I experience using ML and data analysis pipeline
 
+the importnace of the project is in the classifing big data of emegency calling and classify it to the apropiate target  , it can save time resource and life
+
 ## Installation 
 he used libraries are: 
 pandas
@@ -19,18 +21,28 @@ plotly
 sqlite3
 
 ## File description
-app - run the web app
-data - include all the data which necessry + process_data.py - data 	analysis pipeline
-model - include the train_classifier ML pipeline and the classifer
-
+app
+| - template
+| |- master.html # main page of web app
+| |- go.html # classification result page of web app
+|- run.py # Flask file that runs app
+data
+|- disaster_categories.csv # data to process
+|- disaster_messages.csv # data to process
+|- process_data.py
+|- InsertDatabaseName.db # database to save clean data to
+models
+|- train_classifier.py
+|- classifier.pkl # saved model
+README.md
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
-        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
+        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/ETL_Preparation.db`
     - To run ML pipeline that trains classifier and saves
-        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
+        `python models/train_classifier.py data/ETL_Preparation.db models/classifier.pkl`
 
 2. Go to `app` directory: `cd app`
 

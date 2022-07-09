@@ -31,6 +31,9 @@ import pickle
 
 
 def load_data(database_filepath):
+    """
+    lodaing the data base for the ML 
+    """
     engine = create_engine('sqlite:///ETL_Preparation.db')
     df = pd.read_sql_table('data_disaster', engine)
     X = df["message"]
@@ -40,6 +43,11 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """
+    manipulating th text into tokens
+    input - message
+    output- tokens of the text ( more predictable)
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -52,6 +60,12 @@ def tokenize(text):
 
 
 def build_model():
+    """
+    build the ML using pipeline
+    1. token the text 
+    2.Transform a count matrix to a normalized tf or tf-idf           representation
+    3. build the ML using gridsearch
+    """
     pipeline_random_forest = Pipeline([
     ('vect',CountVectorizer(tokenizer=tokenize)),
     ('tfidf', TfidfTransformer()),
@@ -67,6 +81,9 @@ def build_model():
 
 
 def evaluate_model(model, X_test, y_test, category_names):
+    """
+    get evaluation of the model using test data
+    """
     y_pred = model.predict(X_test)
     class_report = classification_report(y_test, y_pred, target_names=category_names)
     print(class_report)
